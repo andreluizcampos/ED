@@ -1,0 +1,25 @@
+77676 Patricia 5.0
+75743 Joao 10.0
+565 Maria 9.6
+121 Alice 8.0
+232 Joana 8.9
+333 Jose 6.0
+Média: 7.92
+================
+77676 Patricia 5.0
+75743 Joao 10.0
+121 Alice 8.0
+232 Joana 8.9
+333 Jose 6.0
+Média: 7.58
+================
+77676 Patricia 5.0
+75743 Joao 10.0
+121 Alice 8.0
+232 Joana 8.9
+Média: 7.97
+================
+77676 Patricia 5.0
+121 Alice 8.0
+232 Joana 8.9
+Média: 7.3

@@ -1,0 +1,26 @@
+Exercício 11! Árvore Var...
+
+Implemente uma árvore com número variável de filhos, com a hierarquia definida em um arquivo de entrada.
+No exemplo abaixo, temos que: A é o nó raiz; A é o nó pai de B, C e D; B é o nó pai de E e F; etc.
+Os itens são sempre letras, ou seja, há no máximo 26 possibilidades :-)
+
+A:-
+B:A
+C:A
+D:A
+E:B
+F:B
+G:C
+H:D
+I:D
+J:G
+
+Saída esperada (impressão da árvore, altura, número de folhas e a possibilidade do usuário digitar uma letra e buscar na árvore):
+Arvore:
+<A<D<I><H>><C<G<J>>><B<F><E>>>
+
+Altura: 3
+Folhas: 5
+
+Digite um aluno para buscar: A
+Item encontrado na arvore.

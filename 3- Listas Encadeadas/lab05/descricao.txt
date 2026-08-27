@@ -1,0 +1,17 @@
+Exercício 5! Lista Simplesmente Encadeada com Sentinela!
+
+Vamos implementar uma lista simplesmente encadeada com sentinela de Estudantes!
+Para isso, implemente: um TAD Estudante, um TAD Lista e um Cliente.
+No TAD Estudante, funcionalidades básicas como criação, liberação e "getters e setters" (matrícula, nome e CR).
+No TAD Lista: criação, liberação, inserção, retirada (por matrícula), impressão.
+
+Arquivos de entrada e saída são fornecidos em anexo.
+No arquivo de entrada, a primeira linha é o número de estudantes na entrada (um estudante por linha).
+Após, cada linha representa uma matrícula a ser retirada da lista. Uma retirada por vez.
+
+Na saída: Imprimir a lista original, com a média de CR's.
+Imprima a lista toda vez que houver uma retirada.
+
+Use valgrind ao final! 
+
+Boa aula!!!

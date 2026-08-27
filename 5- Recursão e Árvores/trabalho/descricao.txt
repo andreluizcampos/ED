@@ -1,0 +1,3 @@
+Trabalho 2025/1: para exercício e diversão
+
+Desenvolva o compactador/descompactador de Huffman, conforme especificações em anexo.

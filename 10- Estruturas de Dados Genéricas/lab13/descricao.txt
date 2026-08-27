@@ -1,0 +1,7 @@
+Exercício 13! Estruturas Genéricas
+
+Transforme o exercício 12 (hash) ou o exercício 10 (ABB) em estruturas genéricas.
+
+Caso escolha a hash (projeto maior, para terminar em casa), lembre-se que: vai precisar de uma lista encadeada genérica também (lista de colisão)!
+
+Pense em fazer TAD's intermediários, de tipos específicos. Por exemplo, no projeto da Hash, teremos: cliente, TAD Palavra, TAD HashPalavras, TAD HashGen, TAD ListaGen.

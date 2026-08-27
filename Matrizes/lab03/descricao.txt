@@ -1,0 +1,13 @@
+Exercício 3! Matrizes dinâmicas...
+
+1) Implemente o TAD Matriz que está especificado no arquivo matriz.h. Gere um arquivo matriz.c com sua implementação. 
+
+2) Faça um testador (cliente.c) que leia a matriz do arquivo de entrada (entrada.txt) e gere um arquivo de saída, como o exemplo dado (saida.txt). A primeira linha do arquivo de entrada contém o número de linhas, seguido do número de colunas da matriz. Após, cada linha do arquivo representa uma linha da matriz de entrada.
+
+Tente implementar o TAD de forma incremental, ao invés de fazer tudo de uma vez. Ou seja, primeiro teste a leitura/impressão da matriz de entrada; depois teste a transporta; e, só ao final, teste a multiplicação.
+ 
+Use o Valgrind para verificar o uso correto da memória. 
+
+Divirta-se!!! :-)
+
+obs.: para implementar a matriz dinâmica, escolha uma das estratégias que vimos na última aula (vetor simples ou vetor de ponteiro). Após, como dever de casa, re-implemente o exercício usando a outra estratégia.

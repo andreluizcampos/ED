@@ -1,0 +1,34 @@
+Exercício 6! Listas Duplamente Encadeadas SEM Sentinela!
+
+Vamos reimplementar o exercício 5 usando, agora, uma Lista Duplamente Encadeada SEM sentinela de Estudantes!
+Para isso, implemente: um TAD Estudante, um TAD Lista e um Cliente.
+No TAD Lista: criação, liberação, inserção, retirada (por matrícula), impressão.
+
+Arquivos de entrada e saída são fornecidos em anexo. No arquivo de entrada, a primeira linha é o número de estudantes na entrada (um estudante por linha). Após, cada linha representa uma matrícula a ser retirada da lista. Uma retirada por vez. Na saída: Imprimir a lista original, com a média de CR's. Imprima a lista toda vez que houver uma retirada. Use valgrind ao final! 
+
+Boa aula!!!
+
+DESAFIO: ao finalizar o exercício acima, tente fazer uma "interpolação" da lista resultante com uma outra lista, carregada do arquivo entrada2.txt.
+
+Lista resultado do exercício anterior:
+77676 Patricia 5.0
+121 Alice 8.0
+232 Joana 8.9
+
+Considere entrada2.txt:
+5
+768 Fernanda 10.0
+867 Jose 7.0
+111 Horacio 9.0
+222 Mariana 4.0
+444 Juliana 8.0
+
+saida2.txt (listas interpoladas)
+77676 Patricia 5.0
+768 Fernanda 10.0
+121 Alice 8.0
+867 Jose 7.0
+232 Joana 8.9
+111 Horacio 9.0
+222 Mariana 4.0
+444 Juliana 8.0

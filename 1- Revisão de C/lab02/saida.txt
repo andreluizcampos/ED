@@ -1,0 +1,48 @@
+Nome do Supermercado: Carone
+Filial: CaroneJdPenha
+Estoque: 15200.00
+Item: maizena, valor unitário: 10.00, quantidade: 100
+Item: cenoura, valor unitário: 2.00, quantidade: 300
+Item: mussarela, valor unitário: 9.00, quantidade: 1000
+Item: chocolate, valor unitário: 20.00, quantidade: 230
+Filial: CaroneJdCamburi
+Estoque: 7800.00
+Item: cenoura, valor unitário: 2.00, quantidade: 2000
+Item: mussarela, valor unitário: 9.00, quantidade: 400
+Item: chocolate, valor unitário: 20.00, quantidade: 10
+Filial: CaroneRetaPenha
+Estoque: 4376.00
+Item: coca, valor unitário: 3.40, quantidade: 90
+Item: macarrao, valor unitário: 5.00, quantidade: 20
+Item: cenoura, valor unitário: 2.00, quantidade: 100
+Item: presunto, valor unitário: 7.00, quantidade: 500
+Item: mussarela, valor unitário: 9.00, quantidade: 30
+Filial: CaroneSerra
+Estoque: 23380.00
+Item: maizena, valor unitário: 10.00, quantidade: 100
+Item: coca, valor unitário: 3.40, quantidade: 200
+Item: macarrao, valor unitário: 5.00, quantidade: 300
+Item: cenoura, valor unitário: 2.00, quantidade: 400
+Item: presunto, valor unitário: 7.00, quantidade: 500
+Item: mussarela, valor unitário: 9.00, quantidade: 600
+Item: ovos, valor unitário: 15.00, quantidade: 700
+Filial: CaroneUfes
+Estoque: 43380.00
+Item: maizena, valor unitário: 10.00, quantidade: 100
+Item: coca, valor unitário: 3.40, quantidade: 200
+Item: macarrao, valor unitário: 5.00, quantidade: 300
+Item: cenoura, valor unitário: 2.00, quantidade: 400
+Item: presunto, valor unitário: 7.00, quantidade: 500
+Item: mussarela, valor unitário: 9.00, quantidade: 600
+Item: ovos, valor unitário: 15.00, quantidade: 700
+Item: chocolate, valor unitário: 20.00, quantidade: 1000
+Filial: CaroneMuqui
+Estoque: 43380.00
+Item: maizena, valor unitário: 10.00, quantidade: 100
+Item: coca, valor unitário: 3.40, quantidade: 200
+Item: macarrao, valor unitário: 5.00, quantidade: 300
+Item: cenoura, valor unitário: 2.00, quantidade: 400
+Item: presunto, valor unitário: 7.00, quantidade: 500
+Item: mussarela, valor unitário: 9.00, quantidade: 600
+Item: ovos, valor unitário: 15.00, quantidade: 700
+Item: chocolate, valor unitário: 20.00, quantidade: 1000

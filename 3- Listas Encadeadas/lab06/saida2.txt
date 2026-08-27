@@ -1,0 +1,8 @@
+77676 Patricia 5.0
+768 Fernanda 10.0
+121 Alice 8.0
+867 Jose 7.0
+232 Joana 8.9
+111 Horacio 9.0
+222 Mariana 4.0
+444 Juliana 8.0
