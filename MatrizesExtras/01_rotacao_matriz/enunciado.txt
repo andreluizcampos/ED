@@ -1,0 +1,48 @@
+Exercício Extra — Estruturas de Dados
+Rotação de Matriz
+
+Este exercício é uma variação do exercício "Revisão de C e Matrizes" (transposta e
+ordenação alfabética). Em vez de apenas transpor a matriz, você deve rotacioná-la
+90 graus no sentido horário — o que é um pouco mais elaborado, pois a matriz
+resultante troca de dimensões (uma matriz N x M vira M x N) e a posição de cada
+elemento não é simplesmente espelhada, precisa ser recalculada.
+
+Desenvolva um programa, organizado com TAD's, para fazer a leitura de um arquivo
+(entrada.txt) contendo uma matriz de inteiros, no seguinte formato:
+
+3 4
+1 2 3 4
+5 6 7 8
+9 10 11 12
+
+A primeira linha contém 2 números (N e M) que representam as dimensões da matriz
+(N linhas, M colunas). As linhas seguintes contêm os N*M valores inteiros da matriz.
+
+Seu programa deve:
+
+1. Carregar a matriz de entrada em uma matriz dinâmica N x M;
+2. Criar a matriz rotacionada 90 graus no sentido horário, com dimensões M x N.
+   O elemento que estava na posição [i][j] da matriz original deve aparecer na
+   posição [j][N-1-i] da matriz rotacionada;
+3. Salvar, em um arquivo de saída (saida.txt), a matriz original e a matriz
+   rotacionada, conforme o exemplo abaixo;
+4. Liberar toda a memória alocada! Use valgrind...
+
+Para a matriz de entrada acima, espera-se a seguinte saída (saida.txt):
+
+1 2 3 4
+5 6 7 8
+9 10 11 12
+
+== Matriz rotacionada 90 graus (sentido horario):
+9 5 1
+10 6 2
+11 7 3
+12 8 4
+
+Regras muito importantes:
+- Implementar um TAD Matriz (ao menos 2 arquivos para o TAD e um para o cliente – main);
+- Usar somente alocação dinâmica para vetores/matrizes;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx);
+- Manipulação de arquivo de entrada somente na main;
+- Liberar toda a memória alocada! Usar o valgrind...
