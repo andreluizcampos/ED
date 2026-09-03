@@ -1,18 +1,19 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include"matriz.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "matriz.h"
 
-int main (){
+int main()
+{
 
-    tMat *m = LeMatriz();
-    tMat *s = MatrizSuavaizada(m);
-    
-    printMat(m);
-    printMat(s);
-    printf("\n\n");
-    LiberaMatrizFull(m);
-    LiberaMatrizFull(s);
+    tMatriz *m = LeMatriz();
+    tMatriz *C = CopiaMatriz(m);
+    SuavizaMatriz(C, m);
+    PrintaMatriz(m);
+    printf("\n");
 
-    return 0;
+    printf("A matriz suavizada eh:\n");
+    PrintaMatriz(C);
 
+    DestroiMatriz(m);
+    DestroiMatriz(C);
 }

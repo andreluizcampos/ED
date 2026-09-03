@@ -1,100 +1,130 @@
-#include "matriz.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include "matriz.h"
 
-struct Matriz
+struct matriz
 {
-    int col, lin;
-    int *elementos;
+    int col;
+    int lin;
+    int **dados;
 };
 
-tMat *LeMatriz()
+tMatriz *LeMatriz()
 {
 
-    tMat *m = (tMat *)malloc(sizeof(tMat));
+    tMatriz *m = (tMatriz *)malloc(sizeof(tMatriz));
+    scanf("%d %d", &m->lin, &m->col);
 
-    scanf("%d %d ", &m->lin, &m->col);
+    m->dados = (int **)malloc(sizeof(int *) * m->lin);
 
-    m->elementos = malloc(sizeof(int) * m->col * m->lin);
+    for (int i = 0; i < m->lin; i++)
+    {
+
+        m->dados[i] = (int *)malloc(sizeof(int) * m->col);
+    }
 
     for (int i = 0; i < m->lin; i++)
     {
 
         for (int j = 0; j < m->col; j++)
         {
-            scanf("%d ", &m->elementos[i * m->col + j]);
+
+            scanf(" %d", &m->dados[i][j]);
         }
     }
 
     return m;
 }
 
-void LiberaMatrizFull(tMat *m)
+void DestroiMatriz(tMatriz *m)
 {
 
-    free(m->elementos);
+    for (int i = 0; i < m->lin; i++)
+    {
+
+        free(m->dados[i]);
+    }
+
+    free(m->dados);
     free(m);
 }
 
-tMat *MatrizSuavaizada(tMat *m)
+void PrintaMatriz(tMatriz *m)
 {
-
-    tMat *s = (tMat *)malloc(sizeof(tMat));
-    s->col = m->col;
-    s->lin = m->lin;
-    s->elementos = (int *)malloc(sizeof(int) * s->col * s->lin);
 
     for (int i = 0; i < m->lin; i++)
     {
 
         for (int j = 0; j < m->col; j++)
         {
-            if (j == 0 || j == m->col - 1 || i == 0 || i == m->lin - 1)
+
+            printf("%d ", m->dados[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+tMatriz *CopiaMatriz(tMatriz *m)
+{
+
+    tMatriz *C = (tMatriz *)malloc(sizeof(tMatriz));
+    C->dados = (int **)malloc(sizeof(int *) * m->lin);
+    C->lin = m->lin;
+    C->col = m->col;
+
+    for (int i = 0; i < C->lin; i++)
+    {
+
+        C->dados[i] = (int *)malloc(sizeof(int) * C->col);
+    }
+
+    for (int i = 0; i < C->lin; i++)
+    {
+
+        for (int j = 0; j < C->col; j++)
+        {
+
+            C->dados[i][j] = m->dados[i][j];
+        }
+    }
+
+    return C;
+}
+
+void SuavizaMatriz(tMatriz *C, tMatriz *m)
+{
+
+    for (int i = 0; i < m->lin; i++)
+    {
+
+        for (int j = 0; j < m->col; j++)
+        {
+
+            if ((i == 0 || i == m->lin - 1) || (j == 0 || j == m->col - 1))
             {
 
-                s->elementos[s->col * i + j] = (m->elementos[i * m->col + j]);
                 continue;
             }
 
             else
             {
 
-                for (int k = i - 1; k <= i + 1; k++)
+                int counter = 0;
+                int acc = 0;
+
+                for (int x = i - 1; x <= i + 1; x++)
                 {
 
-                    int sum = 0;
-                    int contador = 0;
-
-                    for (int l = j - 1; l <= j + 1; l++)
+                    for (int y = j - 1; y <= j + 1; y++)
                     {
 
-                        sum += m->elementos[m->col * k + l];
-                        contador++;
+                        counter += m->dados[x][y];
+                        acc++;
                     }
-
-                    s->elementos[i * m->col + j] = sum / contador;
                 }
+
+                C->dados[i][j] = counter / acc;
             }
         }
     }
-
-    return s;
-}
-
-void printMat(tMat *m)
-{
-
-    for (int i = 0; i < m->lin; i++)
-    {
-
-        for (int j = 0; j < m->col; j++)
-        {
-
-            printf("%d ", m->elementos[i * m->col + j]);
-        }
-
-        printf("\n");
-    }
-    printf("\n");
 }
