@@ -1,16 +1,16 @@
-#ifndef MATRIZ_H
-#define MATRIZ_H
+#ifndef _MATRIZ_H
+#define _MARTIZ_H
 
+typedef struct matriz tMatriz;
 
-typedef struct Matriz tMat;
+tMatriz *LeMatriz();
 
+void DestroiMatriz(tMatriz *m);
 
-tMat *LeMatriz();
+void PrintaMatriz(tMatriz *m);
 
-void LiberaMatrizFull(tMat *m);
+void SuavizaMatriz(tMatriz *C, tMatriz *m);
 
-tMat *MatrizSuavaizada(tMat *m);
-
-void printMat(tMat *m);
-
+tMatriz *CopiaMatriz(tMatriz *m);
+ 
 #endif
