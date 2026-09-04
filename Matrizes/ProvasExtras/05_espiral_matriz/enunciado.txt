@@ -1,0 +1,84 @@
+Prova de Treino — Estruturas de Dados
+Espiral da Matriz
+
+Esta prova retoma a ideia de reorganizar uma matriz (como em "Organiza
+Palavras" e na transposta do exercício de revisão), mas com um percurso bem
+mais elaborado: em vez de uma transformação com regra fixa, é preciso
+percorrer a matriz "de fora para dentro", girando a direção do percurso a
+cada vez que se atinge uma borda já visitada — o que exige controlar 4
+limites (topo, base, esquerda, direita) que vão encolhendo dinamicamente ao
+longo da execução, e não apenas dois índices de laço.
+
+Dada uma matriz, o "percurso em espiral" visita todos os seus elementos
+começando na posição [0][0], andando para a direita até a borda, depois para
+baixo até a borda, depois para a esquerda até a borda, depois para cima até a
+borda já reduzida, e assim sucessivamente, "girando" sempre que a borda atual
+já foi totalmente percorrida, até visitar todos os N*M elementos exatamente
+uma vez.
+
+A entrada será dada em um arquivo texto (entrada.txt), como no exemplo a
+seguir:
+
+3 4
+1 2 3 4
+5 6 7 8
+9 10 11 12
+
+A primeira linha contém 2 números (N e M) que representam as dimensões da
+matriz. As linhas seguintes contêm os valores da matriz.
+
+Para gerar a saída esperada, o programa deve:
+
+1. Carregar a matriz de entrada em uma matriz dinâmica;
+2. Percorrer a matriz em espiral (veja o algoritmo ao final do enunciado),
+   construindo, ao mesmo tempo:
+   (a) a sequência com os N*M valores, na ordem em que foram visitados;
+   (b) uma matriz de "ordem de visita", com as mesmas dimensões da matriz
+       original, em que cada posição [i][j] contém o número (de 1 a N*M) que
+       indica em que passo do percurso aquela posição foi visitada;
+3. Salvar, em um arquivo de saída (saida.txt), a matriz original, a
+   sequência em espiral e a matriz de ordem de visita, conforme o exemplo
+   abaixo;
+4. Liberar toda a memória alocada! Use valgrind...
+
+Para a matriz de entrada acima, espera-se a seguinte saída (saida.txt):
+
+1 2 3 4
+5 6 7 8
+9 10 11 12
+
+== Sequencia em espiral:
+1 2 3 4 8 12 11 10 9 5 6 7
+
+== Matriz de ordem de visita:
+1 2 3 4
+10 11 12 5
+9 8 7 6
+
+O algoritmo de percurso em espiral é o seguinte:
+
+topo = 0; base = N-1; esquerda = 0; direita = M-1
+passo = 1
+enquanto (topo <= base e esquerda <= direita):
+    para j de esquerda ate direita: visitar [topo][j]; passo++
+    topo++
+    para i de topo ate base: visitar [i][direita]; passo++
+    direita--
+    se (topo <= base):
+        para j de direita ate esquerda (decrescente): visitar [base][j]; passo++
+        base--
+    se (esquerda <= direita):
+        para i de base ate topo (decrescente): visitar [i][esquerda]; passo++
+        esquerda++
+
+Regras muito importantes:
+- Implementar um TAD Matriz, como discutido em sala de aula. Ou seja, espera-se,
+  ao menos, 3 arquivos na resposta (2 para o TAD e um para o cliente – main);
+- Usar somente alocação dinâmica para vetores e matrizes;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx), como discutido em
+  sala de aula;
+- Manipulação de arquivo de entrada somente na main (não manipular arquivo de
+  entrada no TAD);
+- Pode-se imprimir as matrizes/sequência no arquivo de saída na função de
+  "imprimir" do TAD;
+- Liberar toda a memória alocada! Usar o valgrind...

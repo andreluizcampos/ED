@@ -1,0 +1,81 @@
+Prova de Treino — Estruturas de Dados
+Maior Bloco Retangular Homogêneo
+
+Esta prova é uma variação mais elaborada da ideia de "Ponto de Sela": lá,
+cada elemento era comparado apenas com sua própria linha e coluna. Aqui, é
+preciso considerar TODAS as possíveis submatrizes retangulares (não apenas uma
+linha ou coluna) e verificar se cada uma delas é homogênea (todos os
+elementos iguais), guardando a maior encontrada — o espaço de busca é bem
+maior e exige um controle cuidadoso dos limites do retângulo.
+
+Um "bloco retangular homogêneo" é uma submatriz contígua (um retângulo dentro
+da matriz, alinhado às linhas e colunas) em que todos os elementos têm o
+mesmo valor. A entrada será dada em um arquivo texto (entrada.txt), como no
+exemplo a seguir:
+
+5 5
+1 1 1 2 3
+1 1 1 2 3
+4 4 5 5 5
+4 4 5 5 5
+4 4 5 5 5
+
+A primeira linha contém 2 números (N e M) que representam as dimensões da
+matriz. As linhas seguintes contêm os valores da matriz.
+
+Para gerar a saída esperada, o programa deve:
+
+1. Carregar a matriz de entrada em uma matriz dinâmica;
+2. Considerar cada posição [i][j] como o canto superior esquerdo de um
+   possível bloco homogêneo. A partir dali, expandir o bloco para a direita e
+   para baixo enquanto todos os elementos abrangidos continuarem iguais a
+   matriz[i][j] (veja o algoritmo ao final do enunciado), calculando a área
+   (altura x largura) de cada bloco válido;
+3. Manter o maior bloco já encontrado (maior área). Em caso de empate,
+   mantenha o primeiro encontrado, varrendo a matriz linha a linha, da
+   esquerda para a direita;
+4. Salvar, em um arquivo de saída (saida.txt), a matriz original e os dados
+   do maior bloco encontrado: o valor, a posição do canto superior esquerdo
+   [i][j], a altura, a largura e a área, conforme o exemplo abaixo;
+5. Liberar toda a memória alocada! Use valgrind...
+
+Para a matriz de entrada acima, espera-se a seguinte saída (saida.txt):
+
+1 1 1 2 3
+1 1 1 2 3
+4 4 5 5 5
+4 4 5 5 5
+4 4 5 5 5
+
+== Maior bloco homogeneo encontrado:
+Valor: 5
+Posicao inicial: [2][2]
+Altura: 3
+Largura: 3
+Area: 9
+
+O algoritmo (para cada posição [i][j] candidata a canto superior esquerdo) é
+o seguinte:
+
+v = matriz[i][j]
+larguraMaxima = infinito  (nenhum limite ainda)
+para k de i ate N-1 (expandindo para baixo):
+    se matriz[k][j] != v: pare (nao da mais para expandir para baixo)
+    l = j
+    enquanto (l+1 < M e matriz[k][l+1] == v): l++
+    larguraDestaLinha = l - j + 1
+    larguraMaxima = minimo(larguraMaxima, larguraDestaLinha)
+    altura = k - i + 1
+    area = altura * larguraMaxima
+    se area > melhorArea: guardar este bloco como o melhor ate agora
+
+Regras muito importantes:
+- Implementar um TAD Matriz, como discutido em sala de aula. Ou seja, espera-se,
+  ao menos, 3 arquivos na resposta (2 para o TAD e um para o cliente – main);
+- Usar somente alocação dinâmica para vetores e matrizes;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx), como discutido em
+  sala de aula;
+- Manipulação de arquivo de entrada somente na main (não manipular arquivo de
+  entrada no TAD);
+- Pode-se imprimir a matriz no arquivo de saída na função de "imprimir" do TAD;
+- Liberar toda a memória alocada! Usar o valgrind...

@@ -1,0 +1,12 @@
+1 1 1 2 3
+1 1 1 2 3
+4 4 5 5 5
+4 4 5 5 5
+4 4 5 5 5
+
+== Maior bloco homogeneo encontrado:
+Valor: 5
+Posicao inicial: [2][2]
+Altura: 3
+Largura: 3
+Area: 9
