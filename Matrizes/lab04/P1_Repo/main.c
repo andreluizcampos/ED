@@ -11,14 +11,8 @@ int main()
     printf("\n");
     OrdenaMatriz(m);
     Printa(m);
-
-    char word[70];
-
-    scanf("%s", word);
-
-    BuscaPalavra(m, word);
-
     LiberaMatriz(m);
+
 
     return 0;
 }

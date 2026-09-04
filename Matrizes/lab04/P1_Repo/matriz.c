@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "matriz.h"
 #include <string.h>
+#include "matriz.h"
+
+#define MAX_STR 90
 
 struct Matriz
 {
-    char **nomes;
+    char **words;
     int col;
     int lin;
 };
@@ -14,29 +16,25 @@ tMatriz *LeMatriz()
 {
 
     tMatriz *m = (tMatriz *)malloc(sizeof(tMatriz));
-
     scanf(" %d %d", &m->lin, &m->col);
 
-    m->nomes = malloc(sizeof(char *) * m->col * m->lin);
-    char nome[80];
+    m->words = (char **)malloc(sizeof(char *) * m->lin * m->col);
 
-    for (int i = 0; i < m->lin; i++)
+    for (int i = 0; i < m->lin * m->col; i++)
     {
 
-        for (int j = 0; j < m->col; j++)
-        {
+        m->words[i] = (char *) malloc(sizeof(char) * MAX_STR);
+    }
 
-            scanf("%s", nome);
+    for (int i = 0; i < m->lin * m->col; i++)
+    {
 
-            int mult = strlen(nome) + 1;
-
-            m->nomes[i * m->col + j] = (char *)malloc(sizeof(char) * mult);
-            strcpy(m->nomes[m->col * i + j], nome);
-        }
+        scanf("%s", m->words[i]);
     }
 
     return m;
 }
+
 void LiberaMatriz(tMatriz *m)
 {
 
@@ -46,12 +44,15 @@ void LiberaMatriz(tMatriz *m)
         for (int j = 0; j < m->col; j++)
         {
 
-            free(m->nomes[i * m->col + j]);
+            free(m->words[i * m->col + j]);
         }
     }
-    free(m->nomes);
+
+    free(m->words);
+
     free(m);
 }
+
 void Printa(tMatriz *m)
 {
 
@@ -61,35 +62,14 @@ void Printa(tMatriz *m)
         for (int j = 0; j < m->col; j++)
         {
 
-            printf("%s ", m->nomes[i * m->col + j]);
+            printf("%s ", m->words[i * m->col + j]);
         }
 
         printf("\n");
     }
 }
 
-int BuscaPalavra(tMatriz *m, char *word)
-{
-
-    for (int i = 0; i < m->lin; i++)
-    {
-
-        for (int j = 0; j < m->col; j++)
-        {
-
-            if (strcmp(m->nomes[i * m->col + j], word) == 0)
-            {
-
-                printf("Palavra encontrada na posicao [%d][%d]!\n", i, j);
-                return 1;
-            }
-        }
-    }
-
-    printf("Palavra não encontrada :(\n)");
-
-    return 0;
-}
+int BuscaPalavra(tMatriz *m, char *word);
 
 void OrdenaMatriz(tMatriz *m)
 {
@@ -101,16 +81,18 @@ void OrdenaMatriz(tMatriz *m)
 
         flag = 0;
 
-        for (int i = 0; i < (m->lin * m->col) - 1; i++)
+        int max = m->col * m->lin;
+
+        for (int i = 0; i < max - 1; i++)
         {
 
-            char *temp = m->nomes[i];
-
-            if (strcmp(m->nomes[i + 1], m->nomes[i]) < 0)
+            if (strcmp(m->words[i], m->words[i + 1]) > 0)
             {
 
-                m->nomes[i] = m->nomes[i + 1];
-                m->nomes[i + 1] = temp;
+                char temp[70];
+                strcpy(temp, m->words[i]);
+                strcpy(m->words[i], m->words[i + 1]);
+                strcpy(m->words[i + 1], temp);
                 flag = 1;
             }
         }
