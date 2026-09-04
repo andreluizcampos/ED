@@ -1,0 +1,13 @@
+1 2 3 4 5 6
+7 8 9 1 2 3
+4 5 6 7 8 9
+1 2 3 4 5 6
+7 8 9 1 2 3
+
+== Submatriz buscada:
+7 8 9
+4 5 6
+
+== Ocorrencias encontradas:
+Posicao [1][0]
+Posicao [2][3]

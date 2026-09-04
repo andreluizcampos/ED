@@ -1,0 +1,83 @@
+Prova de Treino — Estruturas de Dados
+Jogo da Vida (simplificado)
+
+Esta prova generaliza a ideia da prova "Filtro de Suavização": lá, cada
+elemento novo era simplesmente a média dos vizinhos imediatos, calculada uma
+única vez. Aqui, o novo valor de cada célula depende de uma regra condicional
+sobre a contagem de vizinhos vivos (não é uma média), e o processo deve se
+repetir por várias gerações, sempre a partir do resultado da geração anterior
+— ou seja, é preciso guardar e imprimir vários "estágios" da matriz, não
+apenas um.
+
+O Jogo da Vida é um autômato celular: cada célula da matriz está viva (1) ou
+morta (0). A cada geração, o novo estado de uma célula depende do número de
+vizinhos vivos que ela tem (entre os até 8 vizinhos imediatos):
+
+- Se a célula está viva e tem 2 ou 3 vizinhos vivos, ela continua viva;
+  caso contrário, ela morre (por solidão ou superpopulação);
+- Se a célula está morta e tem exatamente 3 vizinhos vivos, ela nasce;
+  caso contrário, ela continua morta.
+
+Células nas bordas da matriz têm menos de 8 vizinhos (a matriz NÃO é
+circular/toroidal: vizinhos fora dos limites simplesmente não contam).
+
+A entrada será dada em um arquivo texto (entrada.txt), como no exemplo a
+seguir:
+
+5 5 2
+0 0 0 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 0 0 0
+
+A primeira linha contém 3 números: N e M (dimensões da matriz) e G (quantidade
+de gerações a simular). As N linhas seguintes contêm o estado inicial da
+matriz (0 ou 1).
+
+Para gerar a saída esperada, o programa deve:
+
+1. Carregar a matriz inicial em uma matriz dinâmica;
+2. Repetir G vezes: a partir do estado atual, calcular o estado da PRÓXIMA
+   geração em uma matriz nova (o estado atual não pode ser alterado enquanto
+   ainda está sendo consultado, senão o cálculo dos vizinhos fica incorreto);
+   a matriz nova passa a ser o estado atual para a próxima repetição;
+3. Salvar, em um arquivo de saída (saida.txt), o estado inicial e o estado
+   resultante de cada uma das G gerações, conforme o exemplo abaixo;
+4. Liberar toda a memória alocada (inclusive dos estados intermediários)!
+   Use valgrind...
+
+Para a entrada acima, espera-se a seguinte saída (saida.txt):
+
+Geracao 0 (inicial):
+0 0 0 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 0 0 0
+
+Geracao 1:
+0 0 0 0 0
+0 0 0 0 0
+0 1 1 1 0
+0 0 0 0 0
+0 0 0 0 0
+
+Geracao 2:
+0 0 0 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 0 0 0
+
+Regras muito importantes:
+- Implementar um TAD Matriz, como discutido em sala de aula. Ou seja, espera-se,
+  ao menos, 3 arquivos na resposta (2 para o TAD e um para o cliente – main);
+- Usar somente alocação dinâmica para vetores e matrizes;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx), como discutido em
+  sala de aula;
+- Manipulação de arquivo de entrada somente na main (não manipular arquivo de
+  entrada no TAD);
+- Pode-se imprimir a matriz no arquivo de saída na função de "imprimir" do TAD;
+- Liberar toda a memória alocada, inclusive das matrizes intermediárias das
+  gerações! Usar o valgrind...

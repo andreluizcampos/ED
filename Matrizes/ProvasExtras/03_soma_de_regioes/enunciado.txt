@@ -1,0 +1,96 @@
+Prova de Treino — Estruturas de Dados
+Soma de Regiões (Matriz de Somas Acumuladas)
+
+Esta prova retoma a ideia da prova "Filtro de Suavização" por outro ângulo:
+lá, uma matriz derivada era construída a partir de médias locais (vizinhos
+imediatos de cada célula). Aqui, a matriz derivada acumula somas de TODOS os
+elementos anteriores (não apenas vizinhos), e depois precisa ser reaproveitada
+várias vezes para responder, com eficiência, a um conjunto de consultas lidas
+do arquivo de entrada — ou seja, a prova tem uma etapa a mais (processar K
+consultas) além de construir a matriz derivada.
+
+Dada uma matriz de inteiros, a "matriz de somas acumuladas" S é definida de
+forma que cada posição S[i][j] contenha a soma de TODOS os elementos do
+retângulo que vai de [0][0] até [i][j] (inclusive) na matriz original. Uma vez
+construída, essa matriz permite calcular a soma de qualquer região retangular
+da matriz original sem precisar somar elemento a elemento.
+
+A entrada será dada em um arquivo texto (entrada.txt), como no exemplo a
+seguir:
+
+4 4
+1 2 3 4
+5 6 7 8
+9 1 2 3
+4 5 6 7
+4
+0 0 1 1
+1 1 3 3
+0 0 3 3
+2 0 2 3
+
+A primeira linha contém 2 números (N e M) que representam as dimensões da
+matriz. As N linhas seguintes contêm os valores da matriz. Em seguida, uma
+linha com um número K representa a quantidade de consultas. Cada uma das K
+linhas seguintes contém 4 números i1 j1 i2 j2, representando uma região
+retangular cujo canto superior esquerdo é [i1][j1] e o canto inferior direito
+é [i2][j2] (ambos inclusive, índices começando em 0).
+
+Para gerar a saída esperada, o programa deve:
+
+1. Carregar a matriz original em uma matriz dinâmica;
+2. Construir a matriz de somas acumuladas S, com as mesmas dimensões da
+   matriz original (veja o algoritmo ao final do enunciado);
+3. Para cada uma das K consultas, calcular a soma da região [i1..i2][j1..j2]
+   usando SOMENTE valores já calculados em S (não somar elemento a elemento
+   da matriz original na hora da consulta);
+4. Salvar, em um arquivo de saída (saida.txt), a matriz original, a matriz de
+   somas acumuladas, e o resultado de cada consulta, conforme o exemplo
+   abaixo;
+5. Liberar toda a memória alocada! Use valgrind...
+
+Para a entrada acima, espera-se a seguinte saída (saida.txt):
+
+1 2 3 4
+5 6 7 8
+9 1 2 3
+4 5 6 7
+
+== Matriz de somas acumuladas:
+1 3 6 10
+6 14 24 36
+15 24 36 51
+19 33 51 73
+
+== Consultas:
+Regiao [0][0] ate [1][1]: soma = 14
+Regiao [1][1] ate [3][3]: soma = 45
+Regiao [0][0] ate [3][3]: soma = 73
+Regiao [2][0] ate [2][3]: soma = 15
+
+O algoritmo para construir a matriz de somas acumuladas é o seguinte:
+
+Para cada posicao (i, j):
+    S[i][j] = original[i][j]
+    se (i > 0): S[i][j] += S[i-1][j]
+    se (j > 0): S[i][j] += S[i][j-1]
+    se (i > 0 e j > 0): S[i][j] -= S[i-1][j-1]
+
+Para responder a uma consulta [i1][j1] ate [i2][j2]:
+
+soma = S[i2][j2]
+se (i1 > 0): soma -= S[i1-1][j2]
+se (j1 > 0): soma -= S[i2][j1-1]
+se (i1 > 0 e j1 > 0): soma += S[i1-1][j1-1]
+
+Regras muito importantes:
+- Implementar um TAD Matriz, como discutido em sala de aula. Ou seja, espera-se,
+  ao menos, 3 arquivos na resposta (2 para o TAD e um para o cliente – main);
+- Usar somente alocação dinâmica para vetores e matrizes;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx), como discutido em
+  sala de aula;
+- Manipulação de arquivo de entrada somente na main (não manipular arquivo de
+  entrada no TAD);
+- Pode-se imprimir as matrizes no arquivo de saída na função de "imprimir" do
+  TAD;
+- Liberar toda a memória alocada! Usar o valgrind...

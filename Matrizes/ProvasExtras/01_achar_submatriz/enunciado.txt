@@ -1,0 +1,84 @@
+Prova de Treino — Estruturas de Dados
+Achar Submatriz
+
+Esta prova generaliza a ideia da prova "Busca Palavras": lá, cada célula da
+matriz já era uma palavra inteira, e bastava comparar célula a célula. Aqui, o
+"padrão" buscado não é mais um único elemento, e sim uma submatriz inteira (um
+bloco de P x Q elementos) que pode aparecer em qualquer posição da matriz
+principal. Para cada posição candidata, é preciso comparar TODOS os elementos
+do bloco, não apenas um.
+
+Você precisa implementar um programa que verifica se uma matriz (o "padrão")
+ocorre como submatriz contígua dentro de uma matriz maior. A entrada será dada
+em um arquivo texto (entrada.txt), como no exemplo a seguir:
+
+5 6
+1 2 3 4 5 6
+7 8 9 1 2 3
+4 5 6 7 8 9
+1 2 3 4 5 6
+7 8 9 1 2 3
+2 3
+7 8 9
+4 5 6
+
+A primeira linha contém 2 números (5 e 6) que representam as dimensões (N e M)
+da matriz principal. As N linhas seguintes contêm os valores da matriz
+principal. Em seguida, uma linha com 2 números (2 e 3) representa as dimensões
+(P e Q) da submatriz padrão a ser buscada, e as P linhas seguintes contêm os
+valores do padrão.
+
+Para gerar a saída esperada, o programa deve:
+
+1. Carregar a matriz principal e a matriz padrão em matrizes dinâmicas
+   (podem usar o mesmo TAD Matriz);
+2. Para cada posição [i][j] da matriz principal onde a submatriz P x Q,
+   iniciada ali, ainda cabe dentro dos limites (ou seja, i + P <= N e
+   j + Q <= M), verificar se TODOS os elementos do padrão coincidem com os
+   elementos correspondentes da matriz principal (veja o algoritmo ao final
+   do enunciado);
+3. Salvar, em um arquivo de saída (saida.txt), a matriz principal, a matriz
+   padrão, e a lista de todas as posições [i][j] onde o padrão foi encontrado
+   (na ordem em que forem descobertas, varrendo linha a linha, da esquerda
+   para a direita). Pode haver zero, uma ou mais ocorrências. Caso não exista
+   nenhuma, escrever "Submatriz nao encontrada.";
+4. Liberar toda a memória alocada! Use valgrind...
+
+Para a entrada acima, espera-se a seguinte saída (saida.txt):
+
+1 2 3 4 5 6
+7 8 9 1 2 3
+4 5 6 7 8 9
+1 2 3 4 5 6
+7 8 9 1 2 3
+
+== Submatriz buscada:
+7 8 9
+4 5 6
+
+== Ocorrencias encontradas:
+Posicao [1][0]
+Posicao [2][3]
+
+O algoritmo de busca é o seguinte:
+
+Para cada posicao [i][j] da matriz principal, com i de 0 ate N-P e j de 0 ate M-Q:
+    encontrou = verdadeiro
+    para a de 0 ate P-1 (enquanto encontrou):
+        para b de 0 ate Q-1 (enquanto encontrou):
+            se principal[i+a][j+b] != padrao[a][b]:
+                encontrou = falso
+    se encontrou:
+        registrar posicao [i][j] como ocorrencia
+
+Regras muito importantes:
+- Implementar um TAD Matriz, como discutido em sala de aula. Ou seja, espera-se,
+  ao menos, 3 arquivos na resposta (2 para o TAD e um para o cliente – main);
+- Usar somente alocação dinâmica para vetores e matrizes;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx), como discutido em
+  sala de aula;
+- Manipulação de arquivo de entrada somente na main (não manipular arquivo de
+  entrada no TAD);
+- Pode-se imprimir as matrizes no arquivo de saída na função de "imprimir" do
+  TAD;
+- Liberar toda a memória alocada! Usar o valgrind...
