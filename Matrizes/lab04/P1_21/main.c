@@ -13,7 +13,7 @@ int main()
     tMatriz *s = CriaSub(m, LI, LF, CI, CF);
     PrintaMatriz(s);
     printf("\n");
-    ImprimeSubs(m);
+   ExibeTODAS(m);
     LiberaMatriz(m);
     LiberaSub(s);
 }
