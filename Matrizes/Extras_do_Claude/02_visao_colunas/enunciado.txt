@@ -1,0 +1,75 @@
+Exercício Extra — Estruturas de Dados
+Visão de Coluna
+
+Na P1_21, CriaSub(M, LI, LF, CI, CF) sempre gerava uma visão retangular, com
+várias colunas. Este exercício pede um caso particular, mas que costuma
+confundir: a visão de UMA ÚNICA coluna, ou seja, col_ini == col_fim.
+
+O ponto-chave é perceber que ela ainda é construída exatamente da mesma forma:
+um vetor de ponteiros onde cada posição i aponta para M->dados[i] + coluna
+(um ponteiro para um único inteiro dentro da linha i da matriz original). Não
+existe "vetor coluna" contíguo na memória — a visão só existe porque guardamos
+vários ponteiros, um por linha.
+
+Desenvolva um programa, organizado com TAD's, para ler um arquivo de entrada
+(entrada.txt) no seguinte formato:
+
+5 5
+1 2 3 4 5
+6 7 8 9 10
+11 12 13 14 15
+16 17 18 19 20
+21 22 23 24 25
+2
+
+A primeira linha contém as dimensões da matriz (N e M). As N linhas seguintes
+contêm os valores da matriz original. A última linha contém um único número:
+o índice da coluna desejada.
+
+Seu programa deve:
+
+1. Carregar a matriz original e imprimi-la na saída;
+2. Criar a visão da coluna pedida (vetor de N ponteiros, um por linha,
+   apontando para M->dados[i] + coluna) e imprimi-la (um valor por linha);
+3. Percorrendo apenas os ponteiros da visão (nunca m[i][coluna] direto na
+   matriz original), calcular e imprimir o mínimo, o máximo e a soma dos
+   elementos da coluna;
+4. Repetir o passo 3 para TODAS as colunas da matriz (0 até M-1), criando uma
+   visão nova para cada coluna, liberando cada visão logo após usá-la;
+5. Liberar a matriz original.
+
+Para a entrada acima, espera-se a seguinte saída (saida.txt):
+
+Matriz Original:
+1 2 3 4 5
+6 7 8 9 10
+11 12 13 14 15
+16 17 18 19 20
+21 22 23 24 25
+
+Visao da Coluna 2:
+3
+8
+13
+18
+23
+
+Min: 3 | Max: 23 | Soma: 65
+
+Estatisticas de todas as colunas:
+Coluna 0 -> Min: 1 | Max: 21 | Soma: 55
+Coluna 1 -> Min: 2 | Max: 22 | Soma: 60
+Coluna 2 -> Min: 3 | Max: 23 | Soma: 65
+Coluna 3 -> Min: 4 | Max: 24 | Soma: 70
+Coluna 4 -> Min: 5 | Max: 25 | Soma: 75
+
+Regras muito importantes:
+- Implementar um TAD Matriz (ao menos 2 arquivos para o TAD e um para o
+  cliente – main);
+- A visão de coluna NÃO pode copiar dados: apontar sempre para os dados da
+  matriz original;
+- Usar somente alocação dinâmica para vetores/matrizes/visões;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx);
+- Manipulação de arquivo de entrada somente na main;
+- Liberar toda a memória alocada (cada visão de coluna e a matriz original)!
+  Usar o valgrind...
