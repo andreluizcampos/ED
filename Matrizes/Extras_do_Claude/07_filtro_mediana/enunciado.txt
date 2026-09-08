@@ -1,0 +1,88 @@
+Prova de Treino — Estruturas de Dados
+Filtro de Mediana
+Nivel: equivalente ao das provas (P1)
+
+Esta prova retoma a ideia da prova "Filtro de Suavizacao" (P1 manha, 15/10/2025),
+mas troca a operacao aplicada a janela 3x3: la, o novo valor de cada pixel era a
+MEDIA dos vizinhos; aqui, e a MEDIANA. A diferenca nao e apenas de formula: para
+achar a mediana e preciso coletar os 9 valores da janela em um vetor auxiliar,
+ORDENAR esse vetor e pegar o elemento do meio. Ou seja, a prova combina o filtro
+de imagem com uma pequena ordenacao (como a da prova "Organiza Palavras"), feita
+uma vez para cada pixel interno.
+
+O filtro de mediana e muito usado no lugar da media porque ele elimina "ruido
+sal e pimenta" (pixels isolados muito claros ou muito escuros) sem borrar as
+bordas da imagem: um pixel de valor 255 no meio de uma regiao de valor 10 nao
+"contamina" a vizinhanca, porque ele vai parar na ponta do vetor ordenado e
+nunca e escolhido como mediana.
+
+A entrada sera dada em um arquivo texto (entrada.txt), como no exemplo:
+
+5 6
+10 12 200 200 198 200
+11 255 202 199 0 201
+10 11 200 201 200 199
+12 10 0 200 255 200
+11 12 199 200 201 200
+
+A primeira linha contem 2 numeros (5 e 6) que representam as dimensoes (linhas e
+colunas) da "matriz" de pixels. As linhas seguintes contem os valores dos pixels,
+inteiros entre 0 e 255.
+
+Para gerar as saidas esperadas, o programa deve:
+
+1. Carregar os dados de entrada em uma matriz dinamica;
+2. Criar uma "matriz de mediana" com as mesmas dimensoes da matriz original. Nela,
+   cada elemento e a mediana dos valores de seus vizinhos imediatos, incluindo ele
+   mesmo (janela 3x3, veja o algoritmo ao final do enunciado). Nas bordas da
+   imagem (ou matriz), os elementos permanecem inalterados;
+3. Contar quantos pixels tiveram seu valor alterado pelo filtro;
+4. Salvar a matriz original, a matriz de mediana e a contagem em um arquivo de
+   saida (saida.txt);
+5. Liberar toda a memoria alocada! Use valgrind...
+
+Para a matriz de entrada acima, espera-se a seguinte saida (saida.txt):
+
+Matriz Original:
+10 12 200 200 198 200
+11 255 202 199 0 201
+10 11 200 201 200 199
+12 10 0 200 255 200
+11 12 199 200 201 200
+
+Matriz com filtro de mediana:
+10 12 200 200 198 200
+11 12 200 200 200 201
+10 11 200 200 200 199
+12 11 199 200 200 200
+11 12 199 200 201 200
+
+Pixels alterados: 8
+
+Repare no efeito do filtro: o pixel 255 da posicao [1][1] virou 12 e o pixel 0 da
+posicao [1][4] virou 200 — o ruido sumiu, mas a "fronteira" entre a regiao escura
+(coluna 0 e 1) e a regiao clara (colunas 2 a 5) continuou nitida.
+
+O algoritmo da mediana e o seguinte:
+
+Para cada pixel (i, j):
+    se (elemento de borda da matriz)
+        m_mediana[i][j] = original[i][j]
+    senao:
+        k = 0
+        para x de i-1 ate i+1:
+            para y de j-1 ate j+1:
+                janela[k] = original[x][y]
+                k++
+        ordena(janela, 9)
+        m_mediana[i][j] = janela[4]     // elemento do meio dos 9
+
+Regras muito importantes:
+- Implementar um TAD Matriz, como discutido em sala de aula. Ou seja, espera-se,
+  ao menos, 3 arquivos na resposta (2 para o TAD e um para o cliente - main);
+- Usar somente alocacao dinamica para vetores e matrizes;
+- Usar tipo opaco estruturado (estilo: typedef struct x Tx);
+- Manipulacao de arquivo de entrada somente na main (nao manipular arquivo de
+  entrada no TAD);
+- Pode-se imprimir a matriz no arquivo de saida na funcao de "imprimir" do TAD;
+- Liberar toda a memoria alocada! Usar o valgrind...
