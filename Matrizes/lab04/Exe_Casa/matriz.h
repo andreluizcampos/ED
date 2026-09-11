@@ -1,21 +1,13 @@
+#ifndef _MATRIZ_H
+#define _MATRIZ_
 
-#ifndef matriz_h
-#define matriz_h
+typedef struct Matriz tMatriz;
 
-
-#define MAX_NOME_STRING 145
-
-typedef struct  Matriz tMatriz;
-
-
-int getLinhas(tMatriz *m);
-int getColunas(tMatriz *m);
-tMatriz* BuildaMatriz();
+tMatriz *CriaMatriz(int l, int c);
+void SetaElemento(char *nome, tMatriz *m, int l, int c);
 void LiberaMatriz(tMatriz *m);
-tMatriz* TranpostaMatriz(tMatriz *m);
-tMatriz* OrdenaAlfa(tMatriz *m);
-void FreeParcial(tMatriz *m);
-void PrintMatriz(tMatriz *m);
-void TotalFree(tMatriz *m);
+void PrintaMatriz(tMatriz *m);
+void OrdenaMatriz(tMatriz *m);
+tMatriz *Tranposta(tMatriz *m);
 
 #endif

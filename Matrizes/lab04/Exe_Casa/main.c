@@ -6,21 +6,33 @@
 int main()
 {
 
-    tMatriz *M = BuildaMatriz();
-    tMatriz *T = TranpostaMatriz(M);
-    tMatriz *A = OrdenaAlfa(M);
+    int col, lin;
 
-    printf("\n");
-    PrintMatriz(M);
-    printf("\n");
-    PrintMatriz(T);
-    printf("\n");
-    PrintMatriz(A);
-    printf("\n");
+    scanf(" %d %d", &lin, &col);
 
-    FreeParcial(T);
-    FreeParcial(A);
-    TotalFree(M);
+    tMatriz *m = CriaMatriz(lin, col);
 
-    return 0;
+    for (int i = 0; i < lin; i++)
+    {
+
+        for (int j = 0; j < col; j++)
+        {
+
+            char *nome;
+            scanf("%ms", &nome);
+            SetaElemento(nome, m, i, j);
+        }
+    }
+
+    PrintaMatriz(m);
+    tMatriz *T = Tranposta(m);
+
+    printf("\n== Primeiro experimento:\n");
+    PrintaMatriz(T);
+    printf("\n== Segundo experimento:\n");
+    OrdenaMatriz(m);
+    PrintaMatriz(m);
+
+    LiberaMatriz(m);
+    LiberaMatriz(T);
 }

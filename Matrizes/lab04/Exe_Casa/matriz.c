@@ -1,148 +1,135 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 #include "matriz.h"
-
-#define MAX_STR 50
 
 struct Matriz
 {
-    int linhas;
     int col;
-    char **conteudo;
+    int lin;
+    char ***nomes;
 };
 
-int getLinhas(tMatriz *m)
-{
-
-    return m->linhas;
-}
-int getColunas(tMatriz *m)
-{
-
-    return m->col;
-}
-
-tMatriz *BuildaMatriz()
+tMatriz *CriaMatriz(int l, int c)
 {
 
     tMatriz *m = (tMatriz *)malloc(sizeof(tMatriz));
-    scanf("%d %d", &m->linhas, &m->col);
-    m->conteudo = (char **)malloc(sizeof(char *) * m->linhas * m->col);
+    m->lin = l;
+    m->col = c;
+    m->nomes = (char ***)malloc(sizeof(char **) * m->lin);
 
-    for (int i = 0; i < m->linhas; i++)
+    for (int i = 0; i < m->lin; i++)
     {
 
-        for (int j = 0; j < m->col; j++)
-        {
-
-            m->conteudo[i * m->col + j] = (char *)malloc(sizeof(char) * MAX_STR);
-            scanf("%s", m->conteudo[i * m->col + j]);
-        }
+        m->nomes[i] = (char **)malloc(sizeof(char *) * m->col);
     }
 
     return m;
 }
+
+void SetaElemento(char *nome, tMatriz *m, int l, int c)
+{
+
+    m->nomes[l][c] = (char *)malloc(sizeof(char) * (strlen(nome) + 1));
+    strcpy(m->nomes[l][c], nome);
+    free(nome);
+}
+
 void LiberaMatriz(tMatriz *m)
 {
 
-    for (int i = 0; i < m->linhas * m->col; i++)
-    {
-
-        free(m->conteudo[i]);
-    }
-    free(m->conteudo);
-    free(m);
-}
-tMatriz *TranpostaMatriz(tMatriz *m)
-{
-
-    tMatriz *T = (tMatriz *)malloc(sizeof(tMatriz));
-    T->linhas = m->col;
-    T->col = m->linhas;
-    T->conteudo = (char **)malloc(sizeof(char *) * T->linhas * T->col);
-
-    for (int i = 0; i < m->linhas; i++)
+    for (int i = 0; i < m->lin; i++)
     {
 
         for (int j = 0; j < m->col; j++)
         {
 
-            T->conteudo[j * T->col + i] = m->conteudo[i * m->col + j];
+            free(m->nomes[i][j]);
         }
+        free(m->nomes[i]);
     }
 
-    return T;
-}
-
-tMatriz *OrdenaAlfa(tMatriz *m)
-{
-    tMatriz *M = (tMatriz *)malloc(sizeof(tMatriz));
-    M->linhas = m->linhas;
-    M->col = m->col;
-    M->conteudo = (char **)malloc(sizeof(char *) * m->linhas * m->col);
-
-    for (int i = 0; i < m->linhas * m->col; i++)
-    {
-
-        M->conteudo[i] = m->conteudo[i];
-    }
-
-    int flag = 1;
-
-    while (flag)
-    {
-
-        flag = 0;
-
-        for (int n = 0; n < (m->linhas * m->col) - 1; n++)
-        {
-
-            if (strcmp(M->conteudo[n], M->conteudo[n + 1]) > 0)
-            {
-
-                char *temp = M->conteudo[n];
-                M->conteudo[n] = M->conteudo[n + 1];
-                M->conteudo[n + 1] = temp;
-                flag = 1;
-            }
-        }
-    }
-
-    return M;
-}
-void FreeParcial(tMatriz *m)
-{
-
-    free(m->conteudo);
+    free(m->nomes);
     free(m);
 }
-
-void PrintMatriz(tMatriz *m)
+void PrintaMatriz(tMatriz *m)
 {
 
-    for (int i = 0; i < m->linhas; i++)
+    for (int i = 0; i < m->lin; i++)
     {
 
         for (int j = 0; j < m->col; j++)
         {
 
-            printf("%s ", m->conteudo[i * m->col + j]);
+            printf("%s ", m->nomes[i][j]);
         }
 
         printf("\n");
     }
 }
 
-void TotalFree(tMatriz *m)
+void OrdenaMatriz(tMatriz *m)
 {
 
-    for (int i = 0; i < m->linhas * m->col; i++)
+    int flag = 1;
+
+    int total = m->lin * m->col;
+
+    for (int i = 0; i < total - 1; i++)
     {
 
-        free(m->conteudo[i]);
+        for (int j = i + 1; j < total; j++)
+        {
+
+            char *nome1 = m->nomes[i / m->col][i % m->col];
+            char *nome2 = m->nomes[j / m->col][j % m->col];
+
+            if (strcmp(nome1, nome2) > 0)
+            {
+
+                char *temp = m->nomes[i / m->col][i % m->col];
+                m->nomes[i / m->col][i % m->col] = m->nomes[j / m->col][j % m->col];
+                m->nomes[j / m->col][j % m->col] = temp;
+            }
+        }
+    }
+}
+
+tMatriz *Tranposta(tMatriz *m)
+{
+
+    tMatriz *Mat = (tMatriz *)malloc(sizeof(tMatriz));
+    Mat->lin = m->col;
+    Mat->col = m->lin;
+
+    Mat->nomes = (char ***)malloc(sizeof(char **) * Mat->lin);
+
+    for (int i = 0; i < Mat->lin; i++)
+    {
+
+        Mat->nomes[i] = (char **)malloc(sizeof(char *) * Mat->col);
     }
 
-    free(m->conteudo);
-    free(m);
+    for (int i = 0; i < Mat->lin; i++)
+    {
+
+        for (int j = 0; j < Mat->col; j++)
+        {
+
+            int size = strlen(m->nomes[j][i]);
+            Mat->nomes[i][j] = (char *)malloc(sizeof(char) * (size + 1));
+        }
+    }
+
+    for (int i = 0; i < Mat->lin; i++)
+    {
+
+        for (int j = 0; j < Mat->col; j++)
+        {
+
+            strcpy(Mat->nomes[i][j], m->nomes[j][i]);
+        }
+    }
+
+    return Mat;
 }
