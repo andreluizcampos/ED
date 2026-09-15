@@ -1,18 +1,44 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include "matriz.h"
 
 int main()
 {
 
-    tMatriz *m = LeMatriz();
-    Printa(m);
+    char *nome;
+
+    int l = 0, c = 0;
+
+    scanf("%d %d", &l, &c);
+
+    tMatriz *M = CriaMatriz(l, c);
+
+    for (int i = 0; i < l; i++)
+    {
+
+        for (int j = 0; j < c; j++)
+        {
+
+            scanf("%ms", &nome);
+            InsereElemeneto(M, i, j, nome);
+            free(nome);
+        }
+    }
+
+    PrintaMatriz(M);
     printf("\n");
-    OrdenaMatriz(m);
-    Printa(m);
-    LiberaMatriz(m);
+    tMatriz *T = CopiaMatriz(M);
 
+    PrintaMatriz(T);
+    printf("\n");
+    printf("\n");
 
-    return 0;
+    OrdenaMatriz(T);
+    printf("\n");
+    printf("\n");
+
+    PrintaMatriz(T);
+    LiberaMatriz(T);
+    LiberaMatriz(M);
 }

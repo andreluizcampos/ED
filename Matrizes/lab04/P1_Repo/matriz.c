@@ -3,34 +3,57 @@
 #include <string.h>
 #include "matriz.h"
 
-#define MAX_STR 90
-
 struct Matriz
 {
-    char **words;
-    int col;
     int lin;
+    int col;
+    char ***nomes;
 };
 
-tMatriz *LeMatriz()
+tMatriz *CriaMatriz(int l, int c)
 {
 
     tMatriz *m = (tMatriz *)malloc(sizeof(tMatriz));
-    scanf(" %d %d", &m->lin, &m->col);
+    m->lin = l;
+    m->col = c;
 
-    m->words = (char **)malloc(sizeof(char *) * m->lin * m->col);
+    m->nomes = (char ***)malloc(sizeof(char **) * m->lin);
 
-    for (int i = 0; i < m->lin * m->col; i++)
+    for (int i = 0; i < m->lin; i++)
     {
 
-        m->words[i] = (char *) malloc(sizeof(char) * MAX_STR);
+        m->nomes[i] = (char **)malloc(sizeof(char *) * m->col);
     }
 
-    for (int i = 0; i < m->lin * m->col; i++)
+    return m;
+}
+
+tMatriz *CopiaMatriz(tMatriz *M)
+{
+
+    tMatriz *m = (tMatriz *)malloc(sizeof(tMatriz));
+    m->lin = M->col;
+    m->col = M->lin;
+
+    m->nomes = (char ***)malloc(sizeof(char **) * m->lin);
+
+    for (int i = 0; i < m->lin; i++)
     {
 
-        scanf("%s", m->words[i]);
+        m->nomes[i] = (char **)malloc(sizeof(char *) * m->col);
     }
+
+    for (int i = 0; i < m->lin; i++)
+    {
+
+        for (int j = 0; j < m->col; j++)
+        {
+
+            InsereElemeneto(m, i, j, M->nomes[j][i]);
+        }
+    }
+
+   
 
     return m;
 }
@@ -44,16 +67,15 @@ void LiberaMatriz(tMatriz *m)
         for (int j = 0; j < m->col; j++)
         {
 
-            free(m->words[i * m->col + j]);
+            free(m->nomes[i][j]);
         }
+        free(m->nomes[i]);
     }
 
-    free(m->words);
-
+    free(m->nomes);
     free(m);
 }
-
-void Printa(tMatriz *m)
+void PrintaMatriz(tMatriz *m)
 {
 
     for (int i = 0; i < m->lin; i++)
@@ -62,39 +84,65 @@ void Printa(tMatriz *m)
         for (int j = 0; j < m->col; j++)
         {
 
-            printf("%s ", m->words[i * m->col + j]);
+            printf("%s ", m->nomes[i][j]);
         }
-
         printf("\n");
     }
 }
 
-int BuscaPalavra(tMatriz *m, char *word);
-
 void OrdenaMatriz(tMatriz *m)
 {
 
-    int flag = 1;
+    int total = m->col * m->lin;
 
-    while (flag)
+    int c = m->col;
+    int l = m->lin;
+
+    for (int i = 0; i < total - 1; i++)
     {
 
-        flag = 0;
-
-        int max = m->col * m->lin;
-
-        for (int i = 0; i < max - 1; i++)
+        for (int j = i + 1; j < total; j++)
         {
 
-            if (strcmp(m->words[i], m->words[i + 1]) > 0)
+            char *n1 = m->nomes[i / c][i % c];
+            char *n2 = m->nomes[j / c][j % c];
+
+            if (strcmp(n1, n2) > 0)
             {
 
-                char temp[70];
-                strcpy(temp, m->words[i]);
-                strcpy(m->words[i], m->words[i + 1]);
-                strcpy(m->words[i + 1], temp);
-                flag = 1;
+                char *temp = m->nomes[i / c][i % c];
+                m->nomes[i / c][i % c] = m->nomes[j / c][j % c];
+                m->nomes[j / c][j % c] = temp;
             }
         }
     }
+}
+
+void PrintaPosicao(tMatriz *m, char *Nome)
+{
+
+    for (int i = 0; i < m->lin; i++)
+    {
+
+        for (int j = 0; j < m->col; j++)
+        {
+
+            if (strcmp(Nome, m->nomes[i][j]) == 0)
+            {
+
+                printf("PALAVRADA ACHADA! [%d, %d]\n", i, j);
+
+                return;
+            }
+        }
+    }
+
+    printf("NAO ACHEI :(\n");
+}
+
+void InsereElemeneto(tMatriz *m, int lin, int col, char *nome)
+{
+    int len = strlen(nome) + 1;
+    m->nomes[lin][col] = (char *)malloc(sizeof(char) * len);
+    strcpy(m->nomes[lin][col], nome);
 }

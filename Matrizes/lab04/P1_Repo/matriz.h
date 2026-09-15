@@ -1,14 +1,16 @@
-#ifndef MAT_H
-#define MAT_H
+#ifndef _MATRIZ_H
+#define _MATRIZ_H
 
-typedef struct  Matriz tMatriz;
+typedef struct Matriz tMatriz;
 
-
-tMatriz *LeMatriz();
+tMatriz *CriaMatriz(int l, int c);
+tMatriz *CopiaMatriz(tMatriz *M);
 void LiberaMatriz(tMatriz *m);
-void Printa(tMatriz *m);
-int BuscaPalavra(tMatriz *m, char *word);
+void PrintaMatriz( tMatriz *m);
 void OrdenaMatriz(tMatriz *m);
+void PrintaPosicao(tMatriz *m, char *Nome);
+void InsereElemeneto( tMatriz *m, int lin, int col, char *nome);
+
 
 
 #endif
