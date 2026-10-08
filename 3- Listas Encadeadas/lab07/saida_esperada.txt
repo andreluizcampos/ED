@@ -1,0 +1,15 @@
+PROFESSORES
+Maria, CPF: 838928 e Salário: 1500.00
+Sicrano, CPF: 9876265 e Salário: 10000.00
+Fulano, CPF: 736252 e Salário: 2000.00
+Alice, CPF: 435261 e Salário: 8000.00
+
+Média de salário dos 4 professores: 5375.00
+
+ALUNOS
+Joao, CPF: 12345 e CR: 8.43
+Maria, CPF: 384739 e CR: 9.50
+Fulano, CPF: 234556 e CR: 2.30
+Jose, CPF: 982736 e CR: 3.00
+
+Média de CR dos 4 alunos: 5.81
