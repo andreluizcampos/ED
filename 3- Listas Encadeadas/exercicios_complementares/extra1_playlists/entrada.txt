@@ -1,0 +1,18 @@
+7
+M3 Bohemian Rhapsody
+M7 Hotel California
+M1 Imagine
+M5 Smells Like Teen Spirit
+M2 Billie Jean
+M6 Like a Rolling Stone
+M4 Hey Jude
+Rock
+5
+M7 M3 M5 M1 M6
+Pop
+5
+M2 M9 M4 M3 M1
+3
+M1 M7 M5
+2
+M2 M4

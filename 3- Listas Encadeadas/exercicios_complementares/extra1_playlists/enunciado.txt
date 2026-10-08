@@ -1,0 +1,91 @@
+=====================================================================
+ Exercício Extra 1 — Gerenciador de Playlists (lista simplesmente encadeada)
+=====================================================================
+
+Você vai implementar um gerenciador de playlists usando lista simplesmente
+encadeada (com sentinela/struct Lista contendo ponteiros ini e fim).
+
+FORMATO DE ENTRADA (entrada.txt)
+---------------------------------------------------------------------
+7                              -> número de músicas no BANCO de músicas
+M3 Bohemian Rhapsody           -> <id> <título (resto da linha, tem espaços)>
+M7 Hotel California
+...                            -> (uma música por linha)
+Rock                           -> nome da primeira playlist
+5                              -> quantidade de ids da primeira playlist
+M7 M3 M5 M1 M6                 -> ids, separados por espaço
+Pop                            -> nome da segunda playlist
+5                              -> quantidade de ids da segunda playlist
+M2 M9 M4 M3 M1                 -> ids (ATENÇÃO: M9 não existe no banco -> ignore)
+3                              -> quantidade de músicas a REMOVER da 1ª playlist
+M1 M7 M5                       -> ids a remover
+2                              -> quantidade de músicas a ADICIONAR NO FINAL da 1ª playlist
+M2 M4                          -> ids a adicionar
+
+O QUE FAZER (nesta ordem)
+---------------------------------------------------------------------
+1) Leia o banco de músicas para uma lista (inserção no final).
+   Essa lista é DONA das músicas (quem libera as músicas é ela).
+
+2) Monte as duas playlists. Cada playlist é uma lista que apenas APONTA
+   para as músicas do banco (não copie a música!).
+   As playlists devem ser mantidas ORDENADAS POR ID (crescente) usando
+   INSERÇÃO ORDENADA: cada música entra já na posição correta.
+   (Não vale inserir tudo e ordenar depois.)
+   Ids que não existem no banco devem ser ignorados.
+
+3) Imprima as duas playlists.
+
+4) Crie uma NOVA lista "Intersecao" com as músicas que estão nas DUAS
+   playlists, na ordem em que aparecem na primeira. Imprima.
+
+5) Remova da primeira playlist as músicas indicadas.
+   Repare que, com a entrada dada, você remove:
+     - o PRIMEIRO nó (M1)  -> precisa atualizar ini
+     - o ÚLTIMO nó  (M7)   -> precisa atualizar fim
+     - um nó do MEIO (M5)
+   Remover um id que não está na lista não deve quebrar nada.
+
+6) Adicione no FINAL da primeira playlist as músicas indicadas
+   (aqui é inserção no final mesmo, sem ordenar). Se o seu ponteiro fim
+   ficou errado no passo 5, é aqui que o programa vai explodir. :)
+   Imprima a playlist com o sufixo " (editada)".
+
+FORMATO DE SAÍDA (saida.txt) — compare com saida_esperada.txt
+---------------------------------------------------------------------
+Playlist: <nome>
+ID: M<id>, Titulo: <titulo>
+...
+
+TADs SUGERIDOS
+---------------------------------------------------------------------
+musica.h : tMusica *CriaMusica(int id, char *titulo);
+           void LiberaMusica(tMusica *m);
+           int  GetIdMusica(tMusica *m);
+           void ImprimeMusica(tMusica *m, FILE *f);
+
+lista.h  : tLista  *CriaLista();
+           void     InsereFinal(tLista *l, tMusica *m);
+           void     InsereOrdenado(tLista *l, tMusica *m);
+           tMusica *BuscaPorId(tLista *l, int id);      // NULL se não achar
+           void     RemovePorId(tLista *l, int id);
+           tLista  *Intersecao(tLista *l1, tLista *l2);
+           void     ImprimeLista(tLista *l, FILE *f);
+           void     LiberaLista(tLista *l);             // libera só os nós
+           void     LiberaListaEMusicas(tLista *l);     // libera nós + músicas
+
+REGRAS
+---------------------------------------------------------------------
+- Alocação dinâmica sempre que possível (inclusive strings).
+- valgrind --leak-check=full deve dar 0 erros e 0 leaks.
+- Cuidado com o double free: as playlists e a interseção NÃO liberam
+  as músicas. Só o banco libera.
+
+DICAS (leia só se travar)
+---------------------------------------------------------------------
+- InsereOrdenado: ande com dois ponteiros (ant e atual) até achar o
+  primeiro nó com id MAIOR que o novo. Casos: lista vazia, entra no
+  começo (ant == NULL), entra no fim (atual == NULL).
+- RemovePorId: mesma ideia de ant/atual. Depois de achar:
+    if (ant == NULL) l->ini = atual->prox; else ant->prox = atual->prox;
+    if (atual == l->fim) l->fim = ant;

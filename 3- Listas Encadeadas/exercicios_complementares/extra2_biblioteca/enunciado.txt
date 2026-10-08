@@ -1,0 +1,91 @@
+=====================================================================
+ Exercício Extra 2 — Histórico de Leitura (lista simplesmente encadeada)
+=====================================================================
+
+Uma biblioteca guarda o histórico de leitura de dois leitores. Você vai
+manipular esses históricos usando lista simplesmente encadeada (struct
+Lista com ponteiros ini e fim).
+
+FORMATO DE ENTRADA (entrada.txt)
+---------------------------------------------------------------------
+6                              -> número de livros no ACERVO
+L4 256 Dom Casmurro            -> <id> <nº de páginas> <título (resto da linha)>
+L1 320 O Cortico
+...                            -> (um livro por linha)
+Ana                            -> nome do primeiro leitor
+4                              -> quantidade de livros lidos
+L2 L5 L1 L6                    -> ids, NA ORDEM em que foram lidos
+Bruno                          -> nome do segundo leitor
+4
+L6 L3 L2 L8                    -> L8 não existe no acervo -> ignore
+L4                             -> id de um livro para inserir no final (passo 7)
+
+O QUE FAZER (nesta ordem)
+---------------------------------------------------------------------
+1) Leia o acervo para uma lista (inserção no final). Essa lista é DONA
+   dos livros.
+
+2) Monte o histórico de cada leitor com INSERÇÃO NO FINAL (o histórico
+   fica na ordem de leitura). Os nós apenas APONTAM para os livros do
+   acervo. Ids inexistentes são ignorados.
+
+3) Imprima os dois históricos. Depois de cada lista imprima a linha
+   "Livros: <qtd>, Total de paginas: <soma>" (percorra a lista contando).
+
+4) INVERTA cada histórico NO LUGAR: sem criar nós novos, sem lista
+   auxiliar, sem vetor. Só trocando os ponteiros prox.
+   Não esqueça de acertar ini e fim. Imprima com o sufixo " (invertida)".
+
+5) CONCATENE o histórico do Bruno no final do da Ana, MOVENDO os nós
+   (sem malloc!): o último nó da Ana passa a apontar pro primeiro do
+   Bruno. Depois disso a lista do Bruno deve ficar VAZIA (ini = fim = NULL)
+   — senão os mesmos nós seriam liberados duas vezes.
+   Imprima "Concatenada" e depois a lista do Bruno "(apos concatenar)".
+
+6) REMOVA OS REPETIDOS da lista concatenada mantendo a PRIMEIRA
+   ocorrência de cada livro. (Diferente da questão das provas, que
+   mantinha a última!) Imprima "Sem repetidos".
+   Repare que com essa entrada o ÚLTIMO nó (L6) é removido -> fim muda.
+
+7) Insira no FINAL da lista sem repetidos o livro do último id da entrada
+   e imprima. Se o fim estiver errado depois do passo 6, aparece aqui.
+
+FORMATO DE SAÍDA (saida.txt) — compare com saida_esperada.txt
+---------------------------------------------------------------------
+Leitor: <nome>
+ID: L<id>, Paginas: <pag>, Titulo: <titulo>
+...
+Livros: <qtd>, Total de paginas: <soma>
+
+TADs SUGERIDOS
+---------------------------------------------------------------------
+livro.h : tLivro *CriaLivro(int id, int paginas, char *titulo);
+          void    LiberaLivro(tLivro *l);
+          int     GetIdLivro(tLivro *l);
+          int     GetPaginas(tLivro *l);
+          void    ImprimeLivro(tLivro *l, FILE *f);
+
+lista.h : tLista *CriaLista();
+          void    InsereFinal(tLista *l, tLivro *b);
+          tLivro *BuscaPorId(tLista *l, int id);
+          void    Inverte(tLista *l);
+          void    Concatena(tLista *destino, tLista *origem); // origem fica vazia
+          void    RemoveRepetidos(tLista *l);
+          void    ImprimeLista(tLista *l, FILE *f);           // com a linha de totais
+          void    LiberaLista(tLista *l);
+          void    LiberaListaELivros(tLista *l);
+
+REGRAS
+---------------------------------------------------------------------
+- Alocação dinâmica sempre que possível (inclusive strings).
+- valgrind --leak-check=full: 0 erros, 0 leaks.
+
+DICAS (leia só se travar)
+---------------------------------------------------------------------
+- Inverte: três ponteiros (ant = NULL, atual = ini, prox).
+    while (atual) { prox = atual->prox; atual->prox = ant;
+                    ant = atual; atual = prox; }
+  Antes do laço, guarde: l->fim = l->ini. Depois: l->ini = ant.
+- Concatena: trate destino vazio e origem vazia separadamente.
+- RemoveRepetidos (manter a primeira): para cada nó p, percorra o resto
+  da lista com (ant, q) a partir de p, removendo os q com mesmo id de p.

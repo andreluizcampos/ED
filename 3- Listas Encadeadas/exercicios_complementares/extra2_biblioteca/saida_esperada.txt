@@ -1,0 +1,48 @@
+Leitor: Ana
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+ID: L5, Paginas: 150, Titulo: Vidas Secas
+ID: L1, Paginas: 320, Titulo: O Cortico
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+Livros: 4, Total de paginas: 1060
+Leitor: Bruno
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+ID: L3, Paginas: 528, Titulo: Grande Sertao Veredas
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+Livros: 3, Total de paginas: 1118
+Leitor: Ana (invertida)
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+ID: L1, Paginas: 320, Titulo: O Cortico
+ID: L5, Paginas: 150, Titulo: Vidas Secas
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+Livros: 4, Total de paginas: 1060
+Leitor: Bruno (invertida)
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+ID: L3, Paginas: 528, Titulo: Grande Sertao Veredas
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+Livros: 3, Total de paginas: 1118
+Concatenada
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+ID: L1, Paginas: 320, Titulo: O Cortico
+ID: L5, Paginas: 150, Titulo: Vidas Secas
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+ID: L3, Paginas: 528, Titulo: Grande Sertao Veredas
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+Livros: 7, Total de paginas: 2178
+Leitor: Bruno (apos concatenar)
+Livros: 0, Total de paginas: 0
+Sem repetidos
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+ID: L1, Paginas: 320, Titulo: O Cortico
+ID: L5, Paginas: 150, Titulo: Vidas Secas
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+ID: L3, Paginas: 528, Titulo: Grande Sertao Veredas
+Livros: 5, Total de paginas: 1588
+Sem repetidos + L4
+ID: L6, Paginas: 180, Titulo: A Hora da Estrela
+ID: L1, Paginas: 320, Titulo: O Cortico
+ID: L5, Paginas: 150, Titulo: Vidas Secas
+ID: L2, Paginas: 410, Titulo: Memorias Postumas de Bras Cubas
+ID: L3, Paginas: 528, Titulo: Grande Sertao Veredas
+ID: L4, Paginas: 256, Titulo: Dom Casmurro
+Livros: 6, Total de paginas: 1844

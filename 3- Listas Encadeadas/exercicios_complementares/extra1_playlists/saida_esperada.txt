@@ -1,0 +1,19 @@
+Playlist: Rock
+ID: M1, Titulo: Imagine
+ID: M3, Titulo: Bohemian Rhapsody
+ID: M5, Titulo: Smells Like Teen Spirit
+ID: M6, Titulo: Like a Rolling Stone
+ID: M7, Titulo: Hotel California
+Playlist: Pop
+ID: M1, Titulo: Imagine
+ID: M2, Titulo: Billie Jean
+ID: M3, Titulo: Bohemian Rhapsody
+ID: M4, Titulo: Hey Jude
+Playlist: Intersecao
+ID: M1, Titulo: Imagine
+ID: M3, Titulo: Bohemian Rhapsody
+Playlist: Rock (editada)
+ID: M3, Titulo: Bohemian Rhapsody
+ID: M6, Titulo: Like a Rolling Stone
+ID: M2, Titulo: Billie Jean
+ID: M4, Titulo: Hey Jude
