@@ -1,0 +1,49 @@
+
+ **** Preparando para a Terceira Bateria de Testes. Vale 10,0 **** 
+
+
+ Imprimindo os alunos da Turma1: 
+Nome: Eduardo Matricula: 111
+Nome: Joao Matricula: 121
+Nome: Maria Matricula: 122
+Nome: Patricia Matricula: 123
+
+ Imprimindo os alunos da Turma2 - com repeticoes de Fulano e Simone: 
+Nome: Simone Matricula: 97
+Nome: Fulano Matricula: 98
+Nome: Simone Matricula: 97
+Nome: Fulano Matricula: 98
+Nome: John Matricula: 99
+Nome: Lucas Matricula: 100
+
+ O Aluno John não se encontra na Turma1 
+
+ Imprimindo os alunos da Turma2 (sem o john) - mas ainda com repeticoes: 
+Nome: Simone Matricula: 97
+Nome: Fulano Matricula: 98
+Nome: Simone Matricula: 97
+Nome: Fulano Matricula: 98
+Nome: Lucas Matricula: 100
+
+ Imprimindo os alunos da Turma1 (sem a patricia): 
+Nome: Eduardo Matricula: 111
+Nome: Joao Matricula: 121
+Nome: Maria Matricula: 122
+
+ Imprimindo a turma merge (ainda com alunos repetidos): 
+Nome: Eduardo Matricula: 111
+Nome: Simone Matricula: 97
+Nome: Joao Matricula: 121
+Nome: Fulano Matricula: 98
+Nome: Maria Matricula: 122
+Nome: Simone Matricula: 97
+Nome: Fulano Matricula: 98
+Nome: Lucas Matricula: 100
+
+ Imprimindo a turma merge (sem repeticoes): 
+Nome: Eduardo Matricula: 111
+Nome: Simone Matricula: 97
+Nome: Joao Matricula: 121
+Nome: Fulano Matricula: 98
+Nome: Maria Matricula: 122
+Nome: Lucas Matricula: 100
